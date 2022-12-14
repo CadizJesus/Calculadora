@@ -7,6 +7,7 @@ import Numbers from './components/Numbers';
 import MathOperations from './components/MathOperations';
 import Result from './components/Result';
 import './App.css'
+import './components/Button/Button';
 
 function App() {
   const [stack, setStack] = useState("")
@@ -18,7 +19,7 @@ function App() {
   console.log("Renderizacion de App",items)
   return (
       <main className='react-calculator'>
-        <h1 >Calculadora</h1>
+        <div className='titulo'>Calculadora</div>
         <Result value={value} />
         <Numbers onClickNumber={number => {
           console.log("Click en number", number)
@@ -30,7 +31,7 @@ function App() {
             setStack("")
           }}
           onDelete={()=>{
-            if (stack.lenght>0){
+            if (stack.length>0){
               console.log("onDelete")
               const newStack = stack.substring(0, stack.length - 1)
               setStack(newStack)
@@ -40,11 +41,22 @@ function App() {
         <MathOperations 
           onClickOperation={operation => {
             console.log("operation:",operation)
-            setStack(`${stack}${operation}`)
+            if (["-","+","*","/"].includes(stack[stack.length-1])) {
+              const newStack = stack.substring(0, stack.length - 1)
+              setStack(`${newStack}${operation}`)
+            } else {
+              setStack(`${stack}${operation}`)
+            }
           }} 
           onClickEqual={equal => {
-            console.log("equal:",equal)
-            setStack(eval(stack).toString())
+            console.log("equal:",stack)
+            if (items.length>0) {
+              if (stack[0]==="0") {
+                setStack(eval(stack.substring(1)).toString())
+              }else{
+                setStack(eval(stack).toString())
+              }
+            }
           }}
         ></MathOperations>
       </main>

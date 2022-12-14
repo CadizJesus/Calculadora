@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button/Button";
+import propTypes from 'prop-types'
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
@@ -21,5 +22,9 @@ const Numbers = ({onClickNumber}) => (
       }
     </section>
 )
+
+Numbers.propTypes ={
+  onClickNumber: propTypes.func.isRequired
+}
 
 export default Numbers

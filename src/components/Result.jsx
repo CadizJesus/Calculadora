@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 const Result = ({value}) => {
     console.log("Renderizacion de result", value)
@@ -11,7 +11,7 @@ const Result = ({value}) => {
 }
 
 Result.propTypes = {
-    value: PropTypes.string.isRequired
+    value: propTypes.string.isRequired
 }
 Result.defaultProps = {
     value: "0"
