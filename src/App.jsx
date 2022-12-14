@@ -22,8 +22,14 @@ function App() {
         <div className='titulo'>Calculadora</div>
         <Result value={value} />
         <Numbers onClickNumber={number => {
-          console.log("Click en number", number)
-          setStack(`${stack}${number}`)  
+          if (number==="0") {
+            if (!(["-","+","*","/"].includes(stack[stack.length-1])) && stack.length>0) {
+              console.log("Click en number", number)
+              setStack(`${stack}${number}`)  
+            }
+          }else{
+            setStack(`${stack}${number}`) 
+          }
         }}></Numbers>
         <Functions 
           onContentClear={()=>{
@@ -50,12 +56,8 @@ function App() {
           }} 
           onClickEqual={equal => {
             console.log("equal:",stack)
-            if (items.length>0) {
-              if (stack[0]==="0") {
-                setStack(eval(stack.substring(1)).toString())
-              }else{
-                setStack(eval(stack).toString())
-              }
+            if (items.length>0 && !["-","+","*","/"].includes(stack[stack.length-1])) {
+              setStack(eval(stack).toString())
             }
           }}
         ></MathOperations>
